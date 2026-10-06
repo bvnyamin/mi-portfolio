@@ -1,130 +1,153 @@
 import type { FC } from "react";
-import { projects } from "../data/projects";
-import { motion, type Variants } from "framer-motion";
-import { Github, ExternalLink, Code2 } from "lucide-react";
+import { useLocale } from "../i18n/context";
+import { projects, RECORD_MAGNITUDE } from "../content/data";
+import type { Project } from "../content/data";
+import Register from "../components/layout/Register";
+import Trace from "../components/seismo/Trace";
+import ActionLink from "../components/seismo/ActionLink";
+import { useArrived } from "../hooks/useArrived";
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+const Row: FC<{ project: Project }> = ({ project }) => {
+  const { t, projectCopy } = useLocale();
+  const copy = projectCopy[project.id];
+  const { ref, arrived } = useArrived<HTMLElement>();
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
+  if (!copy) return null;
 
-const Projects: FC = () => {
+
   return (
-    <section id="projects" className="max-w-6xl mx-auto px-4 py-20">
-      <div className="mb-12">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+    <article
+      ref={ref}
+      className="group border-t border-rule py-10 last:border-b sm:py-14"
+    >
+      <div className="flex items-baseline justify-between gap-6">
+        <h3
+          className="w-expanded text-[clamp(1.75rem,5.2vw,3.5rem)] leading-[1.02] font-semibold tracking-[-0.035em] text-bone transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-purple-400 inline-block">
-            Proyectos Destacados
-          </h2>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-sky-500 via-purple-500 to-pink-500 rounded-full" />
-        </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="mt-4 text-slate-400 max-w-2xl text-lg"
-        >
-          Una selección de mis trabajos más recientes, enfocados en crear
-          experiencias web modernas y funcionales.
-        </motion.p>
+          {copy.title}
+        </h3>
+        <span className="data-label shrink-0 text-bone-3">{project.year}</span>
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-      >
-        {projects.map((project) => (
-          <motion.article
-            key={project.id}
-            variants={itemVariants}
-            className="group relative flex flex-col h-full bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 rounded-2xl overflow-hidden hover:border-sky-500/50 transition-colors duration-300"
-          >
-            {/* Gradient Glow Effect on Hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* This project's own record, arriving in stepped bands. Only the
+          trace is withheld until it arrives — the text is on the sheet from
+          first paint, because a reader must never lose a project to a
+          scroll observer that did not fire.
 
-            <div className="relative p-6 flex flex-col h-full z-10">
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-2 rounded-lg bg-slate-800/50 text-sky-400 group-hover:text-sky-300 transition-colors">
-                  <Code2 size={24} />
-                </div>
-                <div className="flex gap-2">
-                  {project.codeUrl && (
-                    <a
-                      href={project.codeUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2 rounded-full bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700 transition-all"
-                      title="Ver código"
-                    >
-                      <Github size={18} />
-                    </a>
-                  )}
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2 rounded-full bg-slate-800/50 text-slate-400 hover:text-sky-400 hover:bg-slate-700 transition-all"
-                      title="Ver demo"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  )}
-                </div>
-              </div>
+          Under the cursor the pen runs the record again at full gain: a second
+          trace on the same seed, so it stays in phase with the quiet one, swept
+          in left to right by clip-path rather than faded. */}
+      <div data-band={arrived ? "arrived" : "pending"} className="relative mt-6 h-14">
+        <Trace
+          seed={`project-${project.id}`}
+          floor={0.05}
+          density={2.6}
+          events={[{ at: 0.46, magnitude: RECORD_MAGNITUDE * 0.42, decay: 0.22 }]}
+          className="absolute inset-0 h-full w-full text-bone-3"
+        />
+        <div className="absolute inset-0 [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:[clip-path:inset(0_0_0_0)] group-focus-within:[clip-path:inset(0_0_0_0)]">
+          <Trace
+            seed={`project-${project.id}`}
+            floor={0.05}
+            density={2.6}
+            strokeWidth={1.25}
+            events={[{ at: 0.46, magnitude: RECORD_MAGNITUDE, decay: 0.22 }]}
+            className="h-full w-full text-bone"
+          />
+        </div>
+      </div>
 
-              <h3 className="text-xl font-bold text-slate-100 mb-2 group-hover:text-sky-400 transition-colors">
-                {project.title}
-              </h3>
+      <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-7">
+          <p className="field-label text-bone-3">{copy.role}</p>
+          <p className="mt-4 max-w-[58ch] text-[1.0625rem] leading-[1.65] font-light text-bone-2">
+            {copy.summary}
+          </p>
+        </div>
 
-              <p className="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
-                {project.description}
+        <div className="lg:col-span-5">
+          <p className="field-label text-bone-3">{t.projects.stackLabel}</p>
+          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+            {project.stack.map((item) => (
+              <li
+                key={item}
+                className="w-narrow text-[0.875rem] font-medium tracking-[0.04em] text-bone-2"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8 flex flex-wrap items-end gap-x-8 gap-y-4">
+            {project.links?.map((link, i) => (
+              <ActionLink
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noreferrer"
+                weight={i === 0 ? "primary" : "secondary"}
+              >
+                {t.projects.links[link.kind] ?? link.kind}
+              </ActionLink>
+            ))}
+            {!project.links?.length && (
+              <p className="field-label text-bone-3">
+                {project.access === "private"
+                  ? t.projects.privateCode
+                  : t.projects.noLinks}
               </p>
+            )}
+          </div>
+        </div>
+      </div>
 
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+      {project.shots && (
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5">
+          {project.shots.map((shot, i) => (
+            <figure
+              key={shot.large}
+              className="overflow-hidden border border-rule"
+            >
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={`${shot.small} 480w, ${shot.large} 960w`}
+                  sizes="(min-width: 640px) 48vw, 92vw"
+                />
+                <img
+                  src={shot.fallback}
+                  alt={copy.imageAlts?.[i] ?? copy.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[16/10] w-full object-cover object-top"
+                />
+              </picture>
+            </figure>
+          ))}
+        </div>
+      )}
+    </article>
+  );
+};
 
-                <div className="pt-4 border-t border-slate-800/50 flex items-center justify-between text-xs text-slate-500">
-                  <span>{project.stack}</span>
-                </div>
-              </div>
-            </div>
-          </motion.article>
+/** Register 04. One row of the drum per system built. */
+const Projects: FC = () => {
+  const { t } = useLocale();
+
+  return (
+    <Register
+      id="proyectos"
+      index={3}
+      heading={t.projects.heading}
+      lead={t.projects.lead}
+      magnitude={0.95}
+    >
+      <div>
+        {projects.map((project) => (
+          <Row key={project.id} project={project} />
         ))}
-      </motion.div>
-    </section>
+      </div>
+    </Register>
   );
 };
 

@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# impeccable session scratch (review captures, question state)
+.impeccable/review/
+.impeccable/questions/

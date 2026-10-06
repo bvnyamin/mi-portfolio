@@ -1,15 +1,244 @@
 @import "tailwindcss";
 
-/* Animaciones personalizadas */
-/* Animaciones personalizadas eliminadas en favor de Framer Motion */
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource/martian-mono/400.css";
+@import "@fontsource/martian-mono/500.css";
 
-body {
-  background-color: #020617; /* slate-950 */
-  color: #e5e7eb; /* slate-200 */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+/* ── Sismógrafo ─────────────────────────────────────────────────────────────
+   The page is a drum sheet read as a negative: bone ink on an unlit ground.
+   No hue anywhere. Elevation is a hairline or nothing.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  --color-ink: #08090a;
+  --color-bone: #f2f0eb;
+  --color-bone-2: #a5a29b;
+  --color-bone-3: #8a8782;
+  --color-grid: #1d1e22;
+  --color-grid-quiet: #14151a;
+  --color-rule: #2e2f33;
+
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --ease-pen: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html {
-  scroll-behavior: smooth;
+/* The width axis is the type system: one family, three widths.
+   Display is Expanded, prose is Normal, instrument labels are Narrow. */
+@utility w-expanded {
+  font-stretch: 125%;
+}
+@utility w-normal {
+  font-stretch: 100%;
+}
+@utility w-narrow {
+  font-stretch: 78%;
+}
+
+/* Field labels: set in the narrow width of the page's own family. Anything a
+   visitor has to read — a role, an organisation, an issuer — belongs here, not
+   in the instrument's mono. */
+@utility field-label {
+  font-family: var(--font-sans);
+  font-stretch: 78%;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Measured data only — coordinates, timestamps, codes, counters, phase marks. */
+@utility data-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    scrollbar-color: #2c2d31 var(--color-ink);
+    scrollbar-width: thin;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* The drifting sheet runs wider than the viewport; clipping on body alone
+       still lets the document element report the overflow. */
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  /* Browser surfaces belong to the design system too. */
+  ::selection {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2c2d31;
+    border: 3px solid var(--color-ink);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #424347;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-bone);
+    outline-offset: 3px;
+  }
+
+  textarea,
+  input {
+    caret-color: var(--color-bone);
+  }
+
+  a {
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 1px;
+  }
+}
+
+/* The pen writing its run. Driven by CSS rather than the frame loop: a
+   backgrounded tab pauses and resumes this, where a script-driven tween can be
+   dropped mid-stroke and leave the record permanently half-written. */
+@keyframes pen-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pen-draw {
+  stroke-dasharray: 1 1;
+  animation: pen-draw var(--pen-duration, 2.4s) cubic-bezier(0.16, 1, 0.3, 1)
+    var(--pen-delay, 0s) both;
+}
+
+/* A record arrives the way a test strip is read: in discrete bands, never a
+   fade. Three steps, held — the eye catches each one landing. */
+@keyframes band-in {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  33% {
+    clip-path: inset(0 0 66% 0);
+  }
+  66% {
+    clip-path: inset(0 0 33% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+[data-band="pending"] {
+  clip-path: inset(0 0 100% 0);
+}
+
+[data-band="arrived"] {
+  animation: band-in 0.72s steps(1, end) both;
+}
+
+/* The pen at rest. A drum is never still: the nib keeps riding the paper even
+   with nothing to record. Irregular on purpose — an even sine reads mechanical,
+   and a real instrument's idle hand does not keep time. */
+@keyframes pen-live {
+  0% {
+    transform: translateY(0);
+  }
+  12% {
+    transform: translateY(-2px);
+  }
+  25% {
+    transform: translateY(1px);
+  }
+  38% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(2.5px);
+  }
+  63% {
+    transform: translateY(-0.5px);
+  }
+  75% {
+    transform: translateY(1.5px);
+  }
+  88% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.pen-live {
+  animation: pen-live 2.4s cubic-bezier(0.45, 0, 0.55, 1) var(--pen-live-delay, 0s)
+    infinite;
+  will-change: transform;
+}
+
+/* The analyst's pick drops once the pen has passed the onset. Geometry, not
+   opacity: the mark wipes down its own line. */
+@keyframes pick-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.pick-in {
+  animation: pick-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) var(--pick-delay, 1.1s)
+    both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Every record is already written, and the drum holds still. */
+  [data-band] {
+    clip-path: none !important;
+    animation: none !important;
+  }
+
+  .pen-live {
+    animation: none !important;
+  }
 }

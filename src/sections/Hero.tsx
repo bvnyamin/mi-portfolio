@@ -1,107 +1,109 @@
 import type { FC } from "react";
-import profileImage from "../assets/profile.jpg";
-import { Download } from "lucide-react";
-import { motion } from "framer-motion";
+import { useLocale } from "../i18n/context";
+import { contact, station } from "../content/data";
+import { HERO_EVENTS } from "../lib/seismo";
+import Trace from "../components/seismo/Trace";
+import PickMark from "../components/seismo/PickMark";
+import TimeGrid from "../components/seismo/TimeGrid";
+import ActionLink from "../components/seismo/ActionLink";
+import LocaleSwitch from "../components/layout/LocaleSwitch";
+import { SHEET, SHEET_COUNT } from "../lib/sheet";
 
+/**
+ * Register 01. The instrument is already running when the visitor arrives: the
+ * pen writes one quiet record across the sheet, breaks into an event, and the
+ * name lands beneath it on the same datum.
+ */
 const Hero: FC = () => {
+  const { t } = useLocale();
+
   return (
     <section
-      id="hero"
-      className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10 py-16 md:py-24"
+      id="portada"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-20 pb-8 lg:pt-12"
     >
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex-1 space-y-5"
-      >
-        <p className="text-sm uppercase tracking-[0.2em] text-sky-400">
-          Desarrollo web · Ciberseguridad · Auditoría TI
-        </p>
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-          Hola, soy <span className="text-sky-400">Nicolás Villagrán</span>.{" "}
-          <br />
-          Construyo soluciones seguras y bien diseñadas.
-        </h1>
-        <p className="text-slate-300 max-w-xl">
-          Estudiante de Ingeniería en Informática enfocado en desarrollo web
-          (frontend y backend), con interés profesional en ciberseguridad y
-          auditoría de sistemas. Me gusta combinar código limpio, buenas
-          prácticas y enfoque en seguridad.
-        </p>
+      <TimeGrid className="absolute inset-0 -z-10" labels lines={false} />
 
-        <div className="flex flex-wrap items-center gap-4">
-          <a
-            href="#projects"
-            className="px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-medium transition transform hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Ver proyectos
-          </a>
-
-          {/* Botón que DESCARGA el CV */}
-          <a
-            href="/cv-nicolas-villagran.pdf"
-            download
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-700 hover:border-sky-500 text-slate-200 hover:text-sky-400 transition"
-          >
-            <Download className="w-4 h-4" />
-            Descargar CV
-          </a>
-        </div>
-
-        <div className="flex flex-wrap gap-3 pt-4 text-xs text-slate-300">
-          <span className="px-3 py-1 rounded-full border border-slate-700/70 bg-slate-900/50">
-            React
-          </span>
-          <span className="px-3 py-1 rounded-full border border-slate-700/70 bg-slate-900/50">
-            TypeScript
-          </span>
-          <span className="px-3 py-1 rounded-full border border-slate-700/70 bg-slate-900/50">
-            Tailwind CSS
-          </span>
-          <span className="px-3 py-1 rounded-full border border-slate-700/70 bg-slate-900/50">
-            Vite
-          </span>
-        </div>
-      </motion.div>
-
-      {/* Foto + card “glass” */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="flex-1 flex justify-center md:justify-end"
-      >
-        <motion.div
-          animate={{ y: [0, -15, 0] }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="relative w-64 h-72 rounded-3xl bg-gradient-to-br from-sky-500/30 via-slate-900 to-purple-500/30 border border-sky-500/40 shadow-[0_0_40px_rgba(56,189,248,0.4)] overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_0,rgba(56,189,248,0.35),transparent_60%),radial-gradient(circle_at_90%_100%,rgba(168,85,247,0.3),transparent_55%)]" />
-          <div className="relative h-full flex flex-col justify-between p-4">
-            <div className="flex justify-center">
-              <img
-                src={profileImage}
-                alt="Foto de Nicolás Villagrán"
-                className="w-24 h-24 rounded-full border-2 border-slate-100/80 object-cover shadow-lg"
-              />
-            </div>
-            <div className="space-y-1 mt-2">
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-200/80">
-                Disponible para práctica profesional
-              </p>
-              <p className="text-xl font-semibold">Ingeniería en Informática</p>
-              <p className="text-sm text-slate-200/80">
-                Desarrollo web · Seguridad informática · Auditoría TI.
-              </p>
-            </div>
+      {/* Station header */}
+      <div className={SHEET}>
+        <div className="flex items-start justify-between gap-6 pt-8 sm:pt-10">
+          <div className="data-label space-y-1 text-bone-3">
+            <p className="text-bone-2">
+              EST. {station.code} · CL
+            </p>
+            <p>
+              LAT {station.lat} LON {station.lon}
+            </p>
+            <p className="hidden sm:block">{t.station.component}</p>
           </div>
-        </motion.div>
-      </motion.div>
+
+          <LocaleSwitch className="-mt-1.5 hidden lg:flex" />
+        </div>
+      </div>
+
+      {/* The record */}
+      <div className="relative py-10 sm:py-14">
+        <div className="relative h-[clamp(120px,22vh,210px)] w-full">
+          <div className="absolute inset-x-0 top-1/2 h-px bg-grid" />
+          <Trace
+            seed="hero-record"
+            floor={0.055}
+            density={1.9}
+            events={HERO_EVENTS}
+            draw
+            duration={2.6}
+            delay={0.15}
+            title={t.a11y.heroTrace}
+            className="absolute inset-0 h-full w-full text-bone"
+          />
+          <PickMark phase="P" at={61} />
+
+          {/* The nib, still riding the paper once the run is written. It enters
+              only after the pen has finished its pass, so the record is read
+              before anything starts moving again. */}
+          <div
+            className="pointer-events-none absolute top-1/2 right-[2.5%] -translate-y-1/2"
+            style={{ ["--pen-live-delay" as string]: "2.9s" }}
+            aria-hidden="true"
+          >
+            <span className="pen-live block h-5 w-px bg-bone" />
+          </div>
+        </div>
+      </div>
+
+      {/* The nameplate, locked to the record's own datum */}
+      <div className={SHEET}>
+        {/* The name never animates in. The pen is the authored moment; the
+            facts are present the instant the page paints, so a slow network or
+            a failed script can never cost the visitor the one thing that must
+            always be on screen. */}
+        <h1 className="w-expanded text-[clamp(2.75rem,8.5vw,6rem)] leading-[0.88] font-semibold tracking-[-0.035em] text-bone uppercase">
+          Nicolás
+          <br />
+          Villagrán
+        </h1>
+
+        <p className="field-label mt-7 text-bone-2">{t.hero.role}</p>
+
+        <p className="mt-4 max-w-[46ch] text-[clamp(1.0625rem,1.7vw,1.375rem)] leading-[1.5] font-light text-bone-2">
+          {t.hero.lead}
+        </p>
+
+        <div className="mt-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-8 sm:mt-12">
+          <div className="flex flex-wrap items-end gap-x-10 gap-y-6">
+            <ActionLink href="#proyectos" weight="primary">
+              {t.hero.record}
+            </ActionLink>
+            <ActionLink href={contact.cv} download>
+              {t.hero.cv}
+            </ActionLink>
+          </div>
+
+          <p className="data-label hidden text-bone-3 sm:block">
+            {t.station.sheet} 01 / {SHEET_COUNT}
+          </p>
+        </div>
+      </div>
     </section>
   );
 };
