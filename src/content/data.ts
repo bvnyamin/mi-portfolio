@@ -16,10 +16,8 @@
 
 import copilotoConsulta480 from "../assets/projects/copiloto-consulta-480.webp";
 import copilotoConsulta960 from "../assets/projects/copiloto-consulta-960.webp";
-import copilotoConsultaJpg from "../assets/projects/copiloto-consulta-960.jpg";
 import copilotoSql480 from "../assets/projects/copiloto-sql-480.webp";
 import copilotoSql960 from "../assets/projects/copiloto-sql-960.webp";
-import copilotoSqlJpg from "../assets/projects/copiloto-sql-960.jpg";
 
 /**
  * One screenshot, served at two widths.
@@ -32,7 +30,6 @@ import copilotoSqlJpg from "../assets/projects/copiloto-sql-960.jpg";
 export type ProjectShot = {
   small: string;
   large: string;
-  fallback: string;
 };
 
 /** A project can expose several repositories; each is named for what it is. */
@@ -89,12 +86,8 @@ export const projects: Project[] = [
       { kind: "code", url: "https://github.com/bvnyamin/tesis-rag-f1" },
     ],
     shots: [
-      {
-        small: copilotoConsulta480,
-        large: copilotoConsulta960,
-        fallback: copilotoConsultaJpg,
-      },
-      { small: copilotoSql480, large: copilotoSql960, fallback: copilotoSqlJpg },
+      { small: copilotoConsulta480, large: copilotoConsulta960 },
+      { small: copilotoSql480, large: copilotoSql960 },
     ],
   },
   {

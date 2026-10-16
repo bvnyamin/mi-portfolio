@@ -108,20 +108,15 @@ const Row: FC<{ project: Project }> = ({ project }) => {
               key={shot.large}
               className="overflow-hidden border border-rule"
             >
-              <picture>
-                <source
-                  type="image/webp"
-                  srcSet={`${shot.small} 480w, ${shot.large} 960w`}
-                  sizes="(min-width: 640px) 48vw, 92vw"
-                />
-                <img
-                  src={shot.fallback}
-                  alt={copy.imageAlts?.[i] ?? copy.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-[16/10] w-full object-cover object-top"
-                />
-              </picture>
+              <img
+                src={shot.large}
+                srcSet={`${shot.small} 480w, ${shot.large} 960w`}
+                sizes="(min-width: 640px) 48vw, 92vw"
+                alt={copy.imageAlts?.[i] ?? copy.title}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[16/10] w-full object-cover object-top"
+              />
             </figure>
           ))}
         </div>

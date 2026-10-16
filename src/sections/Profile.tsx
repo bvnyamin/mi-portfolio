@@ -3,7 +3,6 @@ import { useLocale } from "../i18n/context";
 import { RECORD_MAGNITUDE } from "../content/data";
 import profile360 from "../assets/profile-360.webp";
 import profile720 from "../assets/profile-720.webp";
-import profileFallback from "../assets/profile-720.jpg";
 import Register from "../components/layout/Register";
 import Trace from "../components/seismo/Trace";
 
@@ -31,22 +30,17 @@ const Profile: FC = () => {
               reads as a mark on the sheet and the figure emerges from the same
               darkness instead of sitting in a lighter box. */}
           <figure className="relative aspect-[4/5] w-full max-w-[320px] overflow-hidden border border-rule lg:max-w-none">
-            <picture>
-              <source
-                type="image/webp"
-                srcSet={`${profile360} 360w, ${profile720} 720w`}
-                sizes="(min-width: 1024px) 300px, 320px"
-              />
-              <img
-                src={profileFallback}
-                alt="Nicolás Villagrán"
-                width={720}
-                height={900}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover"
-              />
-            </picture>
+            <img
+              src={profile720}
+              srcSet={`${profile360} 360w, ${profile720} 720w`}
+              sizes="(min-width: 1024px) 300px, 320px"
+              alt="Nicolás Villagrán"
+              width={720}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
           </figure>
 
           {/* The plate's readings. A recruiter's first three questions,

@@ -58,13 +58,13 @@ técnico. Si hay repo, ese es el primero que vale la pena enlazar.
 El copiloto ya tiene dos capturas conectadas; sirven de ejemplo. Para los demás:
 
 1. Déjame las capturas y las proceso — o hazlo tú: apaisadas ~16:10, y guárdalas
-   en `src/assets/projects/` como WebP a **480 y 960px** de ancho, más un JPG de
-   960 de respaldo.
+   en `src/assets/projects/` como WebP a **480 y 960px** de ancho. Solo WebP:
+   no hace falta un JPG de respaldo.
 2. En `src/content/data.ts`, impórtalas arriba y agrégalas al proyecto:
 
 ```ts
 shots: [
-  { small: miShot480, large: miShot960, fallback: miShotJpg },
+  { small: miShot480, large: miShot960 },
 ],
 ```
 
@@ -149,8 +149,7 @@ Ahora:
 - El máster quedó como `src/assets/profile-source.png`. No se importa, así que
   no se envía al navegador. Si alguna vez quieres volver a empezar, parte de ahí.
 - Lo que sirve la página son `profile-360.webp` y `profile-720.webp`, elegidos
-  por `srcset` según el ancho y la densidad de pantalla, con `profile-720.jpg`
-  de respaldo para navegadores muy antiguos.
+  por `srcset` según el ancho y la densidad de pantalla.
 - Un visitante baja **9 KB** en vez de 600 KB.
 
 La foto además está graduada: convertida a escala de grises y pasada por una
@@ -158,7 +157,7 @@ curva en S que hunde el fondo del estudio (luminancia 26–41) hasta el fondo de
 la página (~9). Por eso ahora la figura emerge de la hoja en vez de verse como
 un rectángulo más claro pegado encima.
 
-**Si cambias la foto**, vuelve a generar las tres versiones — el script está en
+**Si cambias la foto**, vuelve a generar las dos versiones WebP — el script está en
 el historial de esta sesión, o pídemelo de nuevo. No subas un PNG directo.
 
 ## Una cosa técnica pendiente
