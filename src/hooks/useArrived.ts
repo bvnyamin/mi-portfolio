@@ -33,11 +33,17 @@ export function useArrived<T extends HTMLElement>() {
     const el = ref.current;
     if (!el || arrived) return;
 
+    // Threshold 0, never a fraction. A pending element is clipped to nothing,
+    // and Chromium measures intersection after the target's own clip-path: its
+    // ratio stays 0 however far into view it is, so a fractional threshold is
+    // never crossed and only the backstop would ever reveal it. Crossing 0 is
+    // reported on entry even at zero area; the reading band comes from the
+    // root margin instead.
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) setArrived(true);
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0 },
     );
     observer.observe(el);
 
