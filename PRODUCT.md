@@ -17,7 +17,7 @@ El sitio debe servir al escaneo rápido sin volverse superficial para la lectura
 
 ## Product Purpose
 
-Portfolio personal de Nicolás Villagrán Peña, egresado de Ingeniería en Informática (UTEM) y desarrollador Full-Stack en ejercicio. Existe para conseguir su siguiente rol, y para que la conversación empiece con evidencia en vez de con un CV genérico.
+Portfolio personal de Nicolás Villagrán Peña, Ingeniero en Informática (UTEM) titulado con distinción máxima, y desarrollador Full-Stack en ejercicio. Existe para conseguir su siguiente rol, y para que la conversación empiece con evidencia en vez de con un CV genérico.
 
 Éxito = el lector contacta a Nicolás, o entra a un repo/demo. Un visitante que lee todo y se va sin hacer ninguna de las dos cosas es un fracaso del sitio.
 
@@ -52,7 +52,7 @@ Dos capas detrás de eso: IA aplicada (su proyecto de título es un copiloto RAG
 Real y verificado, con origen en el CV (`rendercv_output/Nicolás_Villagrán_CV.pdf`) y el perfil público linkedin.com/in/nvillagran-ti:
 
 - **Experiencia laboral (3 entradas).** BLUE EMPRESA consultoría y desarrollo, Full Stack Developer, jul 2026 – actualidad, remoto: plataforma de Due Diligence y evaluación de proveedores. Enel X, Full Stack Developer, mar – jul 2026, remoto: plataforma de gestión de incidencias en preproducción, backend Python/Flask/Jinja sobre PostgreSQL/PostGIS, Leaflet y QGIS sobre Linux. Enel X, práctica profesional ICT, ene – feb 2026, Las Condes, híbrido: prueba de concepto para reemplazar una plataforma interna.
-- **Formación.** UTEM, Ingeniería en Informática, 2021–2026, egresado.
+- **Formación.** UTEM, Ingeniería en Informática, 2021 – octubre 2026 (defensa del proyecto de título), titulado con distinción máxima. Proyecto de título aprobado con nota 7,0 (la máxima de la escala chilena). En inglés se dice «graded 7.0 out of 7.0»: un lector de afuera no conoce la escala, y «7.0» solo no le dice nada.
 - **Proyectos publicados (5).** Copiloto conversacional RAG + NL2SQL (proyecto de título, 2026); gestión de luminarias en Enel X (2026); RestoMap, proyecto en equipo UTEM jul–nov 2025 (Next.js, TypeScript, Flask, SQLAlchemy, PostgreSQL, Docker); ERP Ansimaq 2025 (Python, Streamlit); gimnasio de Pilates 2024 (PHP, MySQL, Twilio). El proyecto de toma de horario universitario (Matlab, MySQL, 2024) existe y está en el CV, pero Nicolás lo retiró del sitio.
 - **Gestión de luminarias.** Es **el mismo sistema** que describen las dos entradas de Enel X en la trayectoria, no un trabajo distinto: gestión de incidencias en luminarias de alumbrado público, Python/Flask/Jinja sobre PostgreSQL/PostGIS, cartografía con QGIS Server y Leaflet sobre Linux. Vive como ficha de proyecto porque ahí cabe el detalle técnico; las dos entradas de la trayectoria se acortaron deliberadamente para que el sistema no se cuente tres veces. Código corporativo, no publicable: la ficha lo declara como «Código privado · sistema interno» en vez de «Repositorio en preparación», que sería falso.
 - **Certificaciones (5).** ANCI, Respuesta a Incidentes y Taxonomía en Ciberseguridad (ago 2026); Red Hat System Administration I RH124 sobre RHEL 9.3 (jul 2026); Cisco, Introduction to Cybersecurity (dic 2025); BiblioRedes, Inteligencia Artificial Generativa (2025, mes no registrado); AWS Academy Introduction to Cloud S1 y S2 (jul y sept 2024).

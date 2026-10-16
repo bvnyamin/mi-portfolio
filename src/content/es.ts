@@ -5,7 +5,7 @@ export const es: Dict = {
   meta: {
     title: "Nicolás Villagrán — Desarrollador Full-Stack",
     description:
-      "Egresado de Ingeniería en Informática UTEM. Desarrollador Full-Stack: aplicaciones web, servicios backend, datos geoespaciales e IA aplicada sobre Linux.",
+      "Ingeniero en Informática UTEM, titulado con distinción máxima. Desarrollador Full-Stack: aplicaciones web, servicios backend, datos geoespaciales e IA aplicada sobre Linux.",
   },
 
   station: {
@@ -33,15 +33,15 @@ export const es: Dict = {
 
   profile: {
     heading: "Perfil",
-    lead: "Egresado de Ingeniería en Informática de la Universidad Tecnológica Metropolitana, trabajando como desarrollador Full-Stack.",
+    lead: "Ingeniero en Informática de la Universidad Tecnológica Metropolitana, titulado con distinción máxima. Trabajo como desarrollador Full-Stack.",
     body: [
       "Trabajo el ciclo completo: levanto el requerimiento, modelo los datos, construyo la aplicación y la entrego probada.",
       "Mi experiencia está en sistemas que operan de verdad. Gestión de incidencias georreferenciadas usada por equipos de terreno, despacho y contratistas: la llevé desde una prueba de concepto hasta preproducción y la transferí a un equipo interno.",
-      "En paralelo trabajo con IA aplicada. Mi proyecto de título es un copiloto que traduce lenguaje natural en consultas controladas sobre bases de datos, con el foco puesto en el acceso seguro.",
+      "En paralelo trabajo con IA aplicada. Mi proyecto de título fue un copiloto que traduce lenguaje natural en consultas controladas sobre bases de datos, con el foco puesto en el acceso seguro.",
     ],
     facts: [
       { label: "Base", value: "Santiago, Chile" },
-      { label: "Formación", value: "Ing. en Informática, UTEM · Egresado" },
+      { label: "Formación", value: "Ing. en Informática, UTEM · Titulado" },
       { label: "Enfoque", value: "Backend · Full-Stack · Cloud · IA aplicada" },
     ],
     linesHeading: "Líneas de trabajo",
@@ -88,7 +88,7 @@ export const es: Dict = {
       utem: {
         title: "Ingeniería en Informática",
         org: "Universidad Tecnológica Metropolitana (UTEM)",
-        body: "Egresado. Proyecto de título: copiloto conversacional con RAG y NL2SQL.",
+        body: "Titulado con distinción máxima. Proyecto de título: copiloto conversacional con RAG y NL2SQL, aprobado con nota 7,0.",
       },
     },
   },
@@ -203,7 +203,7 @@ export const es: Dict = {
 export const esProjects: ProjectCopyMap = {
   copiloto: {
     title: "Copiloto conversacional",
-    role: "Proyecto de título · UTEM",
+    role: "Proyecto de título · UTEM · Nota 7,0",
     summary:
       "Estudio de Retrieval-Augmented Generation para consultas en lenguaje natural sobre datos estructurados, aplicado a un dataset de Fórmula 1. Combina recuperación semántica en Chroma, generación de SQL y consulta sobre PostgreSQL, devolviendo la respuesta junto con la SQL que la produjo y las filas que la sustentan. Incluye tres modos comparables — híbrido completo, SQL sin RAG y LLM puro — para medir qué aporta cada componente.",
     imageAlts: [

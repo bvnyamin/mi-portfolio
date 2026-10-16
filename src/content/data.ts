@@ -176,7 +176,7 @@ export const timeline: TimelineEntry[] = [
   {
     id: "utem",
     from: "2021",
-    to: "2026",
+    to: "2026-10",
     kind: "study",
   },
 ];

@@ -5,7 +5,7 @@ export const en: Dict = {
   meta: {
     title: "Nicolás Villagrán — Full-Stack Developer",
     description:
-      "Computer Engineering graduate, UTEM Chile. Full-Stack developer: web platforms, backend services, geospatial data and applied AI on Linux.",
+      "Computer Engineer, UTEM Chile, graduated with highest distinction. Full-Stack developer: web platforms, backend services, geospatial data and applied AI on Linux.",
   },
 
   station: {
@@ -33,11 +33,11 @@ export const en: Dict = {
 
   profile: {
     heading: "Profile",
-    lead: "Computer Engineering graduate of Universidad Tecnológica Metropolitana, Santiago, working as a Full-Stack developer.",
+    lead: "Computer Engineer from Universidad Tecnológica Metropolitana, Santiago, graduated with highest distinction. I work as a Full-Stack developer.",
     body: [
       "I work the whole cycle: gather the requirement, model the data, build the application and hand it over tested.",
       "My experience is in systems that actually operate. Georeferenced incident management used by field crews, dispatch and contractors: I carried it from a proof of concept through to pre-production and handed it to an internal team.",
-      "Alongside that I work with applied AI. My final-year project is a copilot that turns natural language into controlled database queries, with the emphasis on safe access.",
+      "Alongside that I work with applied AI. My final-year project was a copilot that turns natural language into controlled database queries, with the emphasis on safe access.",
     ],
     facts: [
       { label: "Based in", value: "Santiago, Chile" },
@@ -88,7 +88,7 @@ export const en: Dict = {
       utem: {
         title: "Computer Engineering",
         org: "Universidad Tecnológica Metropolitana (UTEM)",
-        body: "Graduate. Final-year project: a conversational copilot built on RAG and NL2SQL.",
+        body: "Graduated with highest distinction. Final-year project: a conversational copilot built on RAG and NL2SQL, graded 7.0 out of 7.0.",
       },
     },
   },
@@ -203,7 +203,7 @@ export const en: Dict = {
 export const enProjects: ProjectCopyMap = {
   copiloto: {
     title: "Conversational copilot",
-    role: "Final-year project · UTEM",
+    role: "Final-year project · UTEM · Graded 7.0 / 7.0",
     summary:
       "A study of Retrieval-Augmented Generation for natural-language queries over structured data, applied to a Formula 1 dataset. It combines semantic retrieval in Chroma, SQL generation and a query against PostgreSQL, returning the answer together with the SQL that produced it and the rows that back it. Three comparable modes — full hybrid, SQL without RAG, and the model alone — measure what each component contributes.",
     imageAlts: [
