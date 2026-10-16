@@ -211,7 +211,7 @@ Two browser surfaces are themed from the same ramp outside the token set: the sc
 
 ## Layout
 
-One container governs the whole sheet: centred, `max-width: 1180px`, with a `20px` gutter rising to `32px` at `sm`. From `lg` up the container takes a `216px` left inset and a `48px` right one — the left inset is the margin the fixed register rail occupies, and the rail is anchored to the same centred `1180px` box rather than to the viewport edge, so the index never drifts away from the margin it belongs to as the window widens.
+One container governs the whole sheet: centred, `max-width: 1180px`, with a `20px` gutter rising to `32px` at `sm`. From `lg` up the container takes a `216px` left inset and a `48px` right one — the left inset is the margin the fixed register rail occupies at `lg`. The rail itself is pinned to the viewport's left edge at `32px`: up to `1180px` it sits exactly in that margin, and above it the sheet centres while the index stays on the window edge. That was Nicolás's call (oct 2026), taken over an earlier version that anchored the rail to the centred box; do not re-anchor it.
 
 Vertical rhythm is set by the register wrapper: `80px` of padding at phone width, `112px` at `sm`, `144px` at `lg`. Inside a register the sequence is fixed — the arrival rule and its trace (`56–64px` tall), the sheet number and heading on one baseline (`24px` below), an optional lead (`24px`), then the register's content (`56–64px`). Related groups within a register separate at `80–96px`, field groups at `32px`, a label from its value at `16px`. Repeated records are ruled rows of `40px` padding rising to `56px` at `sm`, separated by hairlines rather than gaps.
 
@@ -219,7 +219,7 @@ Two breakpoints carry everything: `sm` (640px) swaps stacked rows for label/valu
 
 ### Named Rules
 
-**The One Container Rule.** Every section and the margin rail share the single sheet container. A section that invents its own max-width or padding breaks the sheet's left datum, which is the one alignment the entire page is built on.
+**The One Container Rule.** Every section shares the single sheet container; the margin rail is the one deliberate exception, pinned to the viewport edge. A section that invents its own max-width or padding breaks the sheet's left datum, which is the one alignment the entire page is built on.
 
 **The Full-Bleed Record Rule.** Traces and the time grid run edge to edge because the drum sheet does; type always holds the sheet's own margin. The hero nameplate is locked to the station block's datum, never to the trace's.
 
@@ -307,7 +307,7 @@ Three uses, each with its own motion:
 - **Do** separate content with a `1px` `{colors.rule}` hairline and vertical space. A ruled row is this system's card.
 - **Do** keep display type at or under `6rem` and tracking at or above `-0.035em`.
 - **Do** set anything a visitor reads as language in `field-label`, and reserve `data-label`'s mono for actual measurements.
-- **Do** route every section and the margin rail through the single sheet container so the left datum holds.
+- **Do** route every section through the single sheet container so the left datum holds. The margin rail is the exception: it stays on the viewport's left edge.
 - **Do** encode state as a `3px` mark against a `1px` track, letting value follow the geometry.
 - **Do** keep text at `{colors.bone-3}` or lighter, and keep any measure at or under 78ch.
 - **Do** desaturate every photographic raster, grade its backdrop onto the ground where you control the asset, and give it a hairline frame with square corners.
