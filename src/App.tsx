@@ -1,7 +1,9 @@
 import type { FC } from "react";
 import LocaleProvider from "./i18n/LocaleProvider";
 import { useLocale } from "./i18n/context";
+import { CONTAINER } from "./lib/layout";
 import Header from "./components/ink/Header";
+import Sidebar from "./components/ink/Sidebar";
 import Footer from "./components/layout/Footer";
 import Hero from "./sections/Hero";
 import Profile from "./sections/Profile";
@@ -25,12 +27,19 @@ const Page: FC = () => {
       <Header />
       <main>
         <Hero />
-        <Profile />
-        <Trajectory />
-        <Projects />
-        <Stack />
-        <Certifications />
-        <Contact />
+        {/* Below the cover: the index sticks in the left column while the
+            sections scroll in the right one. */}
+        <div className={`grid lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16 ${CONTAINER}`}>
+          <Sidebar />
+          <div className="min-w-0">
+            <Profile />
+            <Trajectory />
+            <Projects />
+            <Stack />
+            <Certifications />
+            <Contact />
+          </div>
+        </div>
       </main>
       <Footer />
     </>
