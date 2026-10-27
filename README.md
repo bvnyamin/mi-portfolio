@@ -16,11 +16,9 @@ npm run lint
 Todo el texto y los datos vienen de tu CV (`rendercv/rendercv_output/`) y de
 tu perfil en linkedin.com/in/nvillagran-ti. Nada está inventado.
 
-El sitio tiene **siete registros**: Portada, Perfil, Trayectoria, Proyectos,
-Stack, Certificaciones y Contacto. Si agregas o quitas uno, los
-contadores («REG. 03 / 07») se recalculan solos — basta con editar
-`REGISTER_IDS` en `src/lib/sheet.ts` y el array `registers` en **ambos**
-idiomas.
+El sitio tiene **siete secciones**: Portada, Perfil, Trayectoria, Proyectos,
+Stack, Certificaciones y Contacto. El orden lo fija `src/App.tsx`, y los
+nombres viven en el array `registers` de **ambos** idiomas.
 
 ## Lo que falta por completar
 
@@ -80,7 +78,7 @@ Lo único que les hago es redimensionar y convertir a WebP. Nada de filtros.
 
 ### Si agregas una tecnología nueva
 
-Los logos del registro «Stack» viven en `src/content/marks.ts`: un
+Los logos de la sección «Stack» viven en `src/content/marks.ts`: un
 trazo SVG por tecnología, extraído una vez del paquete `simple-icons` y
 guardado acá para no arrastrar una dependencia de 10 MB.
 
@@ -101,8 +99,8 @@ el término se muestra solo con texto — que es lo que pasa hoy con *APIs REST*
 MATLAB fueron retirados de simple-icons por sus dueños, y PostGIS nunca estuvo.
 
 **Los logos van monocromos a propósito.** Se pintan con `currentColor`, no con
-el color de marca. Diecinueve paletas distintas serían el único color del sitio
-y romperían el sistema entero.
+el color de marca. El único color del sitio es el bermellón de los enlaces;
+diecinueve paletas de marca competirían con él.
 
 ### Si cambias de trabajo o sacas una certificación
 
@@ -126,7 +124,7 @@ compartir el sitio con alguien de afuera: `src/content/en.ts`.
 actualicé con tu versión de RenderCV. Cada vez que regeneres el CV, cópialo ahí
 de nuevo o el sitio seguirá entregando el viejo.
 
-**Tu teléfono está publicado** en el registro de Contacto, como enlace `tel:`
+**Tu teléfono está publicado** en la sección de Contacto, como enlace `tel:`
 para que se pueda tocar y llamar desde un móvil. Lo pediste explícitamente
 después de que te advirtiera que un número en HTML público lo recogen los
 scrapers de spam. Si en algún momento quieres sacarlo, borra el bloque del
@@ -140,25 +138,14 @@ con precisión entre las demás, cambia `date: "2025"` por `"2025-MM"` en
 
 ## Sobre tu foto
 
-El archivo original se llamaba `profile.jpg` pero **era un PNG** con un canal
-alfa totalmente opaco — una fotografía guardada en un formato sin pérdida, con
-peso muerto encima. Eso explicaba los 600 KB para una imagen de 819×1024.
+- El máster es `src/assets/profile-source.png`. No se importa, así que no se
+  envía al navegador. Todo se regenera desde ahí.
+- La página sirve `portrait-360.webp` (6 KB) y `portrait-720.webp` (17 KB), a
+  color natural, elegidos por `srcset` según el ancho y la densidad de pantalla.
+  Solo se redimensionó: el fondo oscuro del estudio se funde con la página negra.
 
-Ahora:
-
-- El máster quedó como `src/assets/profile-source.png`. No se importa, así que
-  no se envía al navegador. Si alguna vez quieres volver a empezar, parte de ahí.
-- Lo que sirve la página son `profile-360.webp` y `profile-720.webp`, elegidos
-  por `srcset` según el ancho y la densidad de pantalla.
-- Un visitante baja **9 KB** en vez de 600 KB.
-
-La foto además está graduada: convertida a escala de grises y pasada por una
-curva en S que hunde el fondo del estudio (luminancia 26–41) hasta el fondo de
-la página (~9). Por eso ahora la figura emerge de la hoja en vez de verse como
-un rectángulo más claro pegado encima.
-
-**Si cambias la foto**, vuelve a generar las dos versiones WebP — el script está en
-el historial de esta sesión, o pídemelo de nuevo. No subas un PNG directo.
+**Si cambias la foto**, pídeme que regenere las dos versiones. No subas un PNG
+directo.
 
 ## Una cosa técnica pendiente
 
@@ -177,20 +164,20 @@ src/
     es.ts       Copia en español + copia de proyectos.
     en.ts       Copia en inglés.
     types.ts    Formas de los diccionarios. TypeScript te avisa si falta algo.
-  sections/     Un archivo por registro (01 Portada … 06 Contacto).
+  sections/     Un archivo por sección (Hero = Portada … Contact = Contacto).
   components/
-    seismo/     Las piezas del instrumento: trazo, grilla, marca de llegada, enlaces.
-    layout/     Riel de registros, barra móvil, selector de idioma, pie.
+    ink/        Encabezado fijo, sección (línea + título + contenido), enlace
+                con subrayado a mano, logos de tecnologías.
+    layout/     Pie.
   lib/
-    seismo.ts   La geometría del sismograma. Determinista: la misma semilla
-                dibuja siempre la misma línea.
-    sheet.ts    Márgenes de la hoja e ids de los registros.
+    layout.ts   El contenedor de la página (ancho máximo y márgenes).
+    dates.ts    Formato de fechas y el cálculo de meses de cada etapa.
   i18n/         Proveedor de idioma. Guarda la elección en localStorage.
 ```
 
-Si agregas un registro nuevo, su `id` tiene que entrar en `REGISTER_IDS`
-(`src/lib/sheet.ts`) y su nombre en el array `registers` de **ambos** idiomas,
-en el mismo orden.
+Si agregas una sección nueva, móntala en `src/App.tsx` con el componente
+`Section` (`src/components/ink/Section.tsx`), dale un `id` para los enlaces y
+agrega su nombre en el array `registers` de **ambos** idiomas.
 
 ---
 
@@ -198,13 +185,17 @@ en el mismo orden.
 
 Decisiones que conviene no romper sin querer:
 
-- **Sin color.** La paleta es un fondo `#08090A` y un hueso `#F2F0EB`, cero tono.
-  El estado se expresa con grosor de línea y geometría, nunca con color.
-- **Una sola familia tipográfica en tres anchos.** Archivo variable: 125% para
-  display, 100% para prosa, 78% para etiquetas. La mono (Martian Mono) está
-  reservada **solo para mediciones**: coordenadas, contadores, años, marcas de
-  fase. Si la usas para una etiqueta que se lee como texto, se rompe el sistema.
-- **Un solo momento animado:** el lápiz dibujando el trazo. Nada entra con
-  `opacity: 0` — el nombre y los datos están en pantalla desde el primer pintado,
-  sin depender de que corra un script.
-- **`prefers-reduced-motion` se respeta en serio:** todo aparece ya dibujado.
+- **Una columna de texto sobre negro**, al estilo de una página índice
+  personal. Fondo `#0A0A0A`, texto `#F2F2F0`, dos grises más suaves y líneas
+  finas `#262626`.
+- **Un solo color, el bermellón `#FF6A3D`, y solo para señalar:** el subrayado
+  a mano de los enlaces, el hover, la selección de texto y la barra de scroll.
+  No lo uses en títulos ni fondos.
+- **Geist para el texto y Geist Mono para los rótulos chicos en mayúsculas.**
+- **El rendimiento es parte del diseño.** El scroll es el nativo del
+  navegador: no vuelvas a poner Lenis ni desenfoques (`backdrop-filter`), ni
+  animaciones pegadas al scroll. Cada animación es una transición CSS que corre
+  una vez (al cargar o al entrar la sección) o al pasar el cursor.
+- **Los textos están en pantalla desde el primer pintado.** Solo se animan
+  los subrayados, las líneas de sección, la grilla y los hovers.
+- **`prefers-reduced-motion` se respeta:** todo aparece ya dibujado.

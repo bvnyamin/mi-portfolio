@@ -8,9 +8,15 @@ export const es: Dict = {
       "Ingeniero en Informática UTEM, titulado con distinción máxima. Desarrollador Full-Stack: aplicaciones web, servicios backend, datos geoespaciales e IA aplicada sobre Linux.",
   },
 
-  station: {
-    component: "COMP. N-S",
-    sheet: "REG.",
+  ui: {
+    role: "Desarrollador Full-Stack",
+    open: "Abierto a oportunidades",
+    menu: "Menú",
+    close: "Cerrar",
+    month: "mes",
+    months: "meses",
+    ongoing: "en curso",
+    fig: "Fig.",
   },
 
   registers: [
@@ -26,18 +32,41 @@ export const es: Dict = {
   hero: {
     role: "Ingeniería en Informática · UTEM",
     lead: "Desarrollador Full-Stack. Construyo plataformas web empresariales, con datos geoespaciales e IA aplicada sobre Linux.",
-    record: "Ver el registro",
+    record: "Ver proyectos",
     cv: "Descargar CV",
-    scroll: "Desplaza para avanzar el tambor",
+    tags: [
+      "Desarrollador Full-Stack · Ingeniero en Informática",
+      "Full Stack @ BLUE Empresa · Santiago, Chile",
+    ],
+    intro: [
+      "Construyo plataformas web empresariales con ",
+      { text: "datos geoespaciales", href: "#proyectos" },
+      " e ",
+      { text: "IA aplicada", href: "https://github.com/bvnyamin/tesis-rag-f1" },
+      " sobre Linux. Llevé el ",
+      { text: "sistema de luminarias de Enel X", href: "#trayectoria" },
+      " de prueba de concepto a preproducción, y me titulé en la UTEM con ",
+      { text: "distinción máxima", href: "#trayectoria" },
+      ".",
+    ],
+    selected: "Proyectos",
   },
 
   profile: {
     heading: "Perfil",
     lead: "Ingeniero en Informática de la Universidad Tecnológica Metropolitana, titulado con distinción máxima. Trabajo como desarrollador Full-Stack.",
     body: [
-      "Trabajo el ciclo completo: levanto el requerimiento, modelo los datos, construyo la aplicación y la entrego probada.",
-      "Mi experiencia está en sistemas que operan de verdad. Gestión de incidencias georreferenciadas usada por equipos de terreno, despacho y contratistas: la llevé desde una prueba de concepto hasta preproducción y la transferí a un equipo interno.",
-      "En paralelo trabajo con IA aplicada. Mi proyecto de título fue un copiloto que traduce lenguaje natural en consultas controladas sobre bases de datos, con el foco puesto en el acceso seguro.",
+      ["Trabajo el ciclo completo: levanto el requerimiento, modelo los datos, construyo la aplicación y la entrego probada."],
+      [
+        "Mi experiencia está en sistemas que operan de verdad. ",
+        { text: "Gestión de incidencias georreferenciadas", href: "#proyecto-luminarias" },
+        " usada por equipos de terreno, despacho y contratistas: la llevé desde una prueba de concepto hasta preproducción y la transferí a un equipo interno.",
+      ],
+      [
+        "En paralelo trabajo con IA aplicada. Mi proyecto de título fue un ",
+        { text: "copiloto", href: "#proyecto-copiloto" },
+        " que traduce lenguaje natural en consultas controladas sobre bases de datos, con el foco puesto en el acceso seguro.",
+      ],
     ],
     facts: [
       { label: "Base", value: "Santiago, Chile" },
@@ -66,7 +95,7 @@ export const es: Dict = {
 
   path: {
     heading: "Trayectoria",
-    lead: "Experiencia y formación, en orden de registro.",
+    lead: "Experiencia y formación, con lo que duró cada etapa.",
     present: "Actualidad",
     techLabel: "Stack",
     entries: {
@@ -189,13 +218,11 @@ export const es: Dict = {
 
   a11y: {
     skip: "Saltar al contenido",
-    nav: "Índice de registros",
+    nav: "Secciones",
     locale: "Idioma",
     localeEs: "Cambiar a español",
     localeEn: "Switch to English",
-    trace: "Traza sísmica decorativa",
-    heroTrace:
-      "Registro sísmico: línea plana que entra en un evento de alta amplitud y decae en coda.",
+    portrait: "Retrato de Nicolás Villagrán.",
   },
 };
 

@@ -1,121 +1,67 @@
 import type { FC } from "react";
+import { ArrowUpRight, Lock } from "lucide-react";
 import { useLocale } from "../i18n/context";
-import { projects, RECORD_MAGNITUDE } from "../content/data";
+import { projects } from "../content/data";
 import type { Project } from "../content/data";
-import Register from "../components/layout/Register";
-import Trace from "../components/seismo/Trace";
-import ActionLink from "../components/seismo/ActionLink";
-import { useArrived } from "../hooks/useArrived";
+import Section from "../components/ink/Section";
+import InkLink from "../components/ink/InkLink";
 
-const Row: FC<{ project: Project }> = ({ project }) => {
+const Entry: FC<{ project: Project }> = ({ project }) => {
   const { t, projectCopy } = useLocale();
   const copy = projectCopy[project.id];
-  const { ref, arrived } = useArrived<HTMLElement>();
-
   if (!copy) return null;
 
-
   return (
-    <article
-      ref={ref}
-      className="group border-t border-rule py-10 last:border-b sm:py-14"
-    >
-      <div className="flex items-baseline justify-between gap-6">
-        <h3
-          className="w-expanded text-[clamp(1.75rem,5.2vw,3.5rem)] leading-[1.02] font-semibold tracking-[-0.035em] text-bone transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2"
-        >
+    <article id={`proyecto-${project.id}`} className="scroll-mt-20 border-b border-line py-10 first:pt-0">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <h3 className="text-[clamp(1.375rem,2vw,1.75rem)] leading-[1.1] font-semibold tracking-[-0.03em]">
           {copy.title}
         </h3>
-        <span className="data-label shrink-0 text-bone-3">{project.year}</span>
+        <span className="mono-label text-paper-3 tabular-nums">{project.year}</span>
       </div>
+      <p className="mono-label mt-2 text-paper-2">{copy.role}</p>
 
-      {/* This project's own record, arriving in stepped bands. Only the
-          trace is withheld until it arrives — the text is on the sheet from
-          first paint, because a reader must never lose a project to a
-          scroll observer that did not fire.
+      <p className="mt-5 max-w-[64ch] text-[1.0625rem] leading-[1.7] text-paper-2">{copy.summary}</p>
 
-          Under the cursor the pen runs the record again at full gain: a second
-          trace on the same seed, so it stays in phase with the quiet one, swept
-          in left to right by clip-path rather than faded. */}
-      <div data-band={arrived ? "arrived" : "pending"} className="relative mt-6 h-14">
-        <Trace
-          seed={`project-${project.id}`}
-          floor={0.05}
-          density={2.6}
-          events={[{ at: 0.46, magnitude: RECORD_MAGNITUDE * 0.42, decay: 0.22 }]}
-          className="absolute inset-0 h-full w-full text-bone-3"
-        />
-        <div className="absolute inset-0 [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:[clip-path:inset(0_0_0_0)] group-focus-within:[clip-path:inset(0_0_0_0)]">
-          <Trace
-            seed={`project-${project.id}`}
-            floor={0.05}
-            density={2.6}
-            strokeWidth={1.25}
-            events={[{ at: 0.46, magnitude: RECORD_MAGNITUDE, decay: 0.22 }]}
-            className="h-full w-full text-bone"
-          />
-        </div>
-      </div>
+      <p className="mono-label mt-5 text-paper-3">{project.stack.join(" / ")}</p>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-7">
-          <p className="field-label text-bone-3">{copy.role}</p>
-          <p className="mt-4 max-w-[58ch] text-[1.0625rem] leading-[1.65] font-light text-bone-2">
-            {copy.summary}
-          </p>
-        </div>
-
-        <div className="lg:col-span-5">
-          <p className="field-label text-bone-3">{t.projects.stackLabel}</p>
-          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-            {project.stack.map((item) => (
-              <li
-                key={item}
-                className="w-narrow text-[0.875rem] font-medium tracking-[0.04em] text-bone-2"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-8 flex flex-wrap items-end gap-x-8 gap-y-4">
-            {project.links?.map((link, i) => (
-              <ActionLink
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noreferrer"
-                weight={i === 0 ? "primary" : "secondary"}
-              >
+      <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+        {project.links?.length ? (
+          project.links.map((link, i) => (
+            <InkLink key={link.url} href={link.url} order={i} className="mono-label group">
+              <span className="inline-flex items-center gap-1.5">
                 {t.projects.links[link.kind] ?? link.kind}
-              </ActionLink>
-            ))}
-            {!project.links?.length && (
-              <p className="field-label text-bone-3">
-                {project.access === "private"
-                  ? t.projects.privateCode
-                  : t.projects.noLinks}
-              </p>
-            )}
-          </div>
-        </div>
+                <ArrowUpRight
+                  className="h-3.5 w-3.5 transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                />
+              </span>
+            </InkLink>
+          ))
+        ) : (
+          <p className="mono-label inline-flex items-center gap-2 text-paper-3">
+            {project.access === "private" && <Lock className="h-3.5 w-3.5" strokeWidth={2} aria-hidden="true" />}
+            {project.access === "private" ? t.projects.privateCode : t.projects.noLinks}
+          </p>
+        )}
       </div>
 
-      {project.shots && (
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5">
+      {project.shots && project.shots.length > 0 && (
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {project.shots.map((shot, i) => (
             <figure
               key={shot.large}
-              className="overflow-hidden border border-rule"
+              className="overflow-hidden rounded-[14px] border border-line bg-[#111]"
             >
               <img
                 src={shot.large}
                 srcSet={`${shot.small} 480w, ${shot.large} 960w`}
-                sizes="(min-width: 640px) 48vw, 92vw"
+                sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 90vw"
                 alt={copy.imageAlts?.[i] ?? copy.title}
                 loading="lazy"
                 decoding="async"
-                className="aspect-[16/10] w-full object-cover object-top"
+                className="block aspect-[16/10] w-full object-cover object-top"
               />
             </figure>
           ))}
@@ -125,24 +71,16 @@ const Row: FC<{ project: Project }> = ({ project }) => {
   );
 };
 
-/** Register 04. One row of the drum per system built. */
+/** Proyectos. Each system built, its stack, and where to read the code. */
 const Projects: FC = () => {
   const { t } = useLocale();
 
   return (
-    <Register
-      id="proyectos"
-      index={3}
-      heading={t.projects.heading}
-      lead={t.projects.lead}
-      magnitude={0.95}
-    >
-      <div>
-        {projects.map((project) => (
-          <Row key={project.id} project={project} />
-        ))}
-      </div>
-    </Register>
+    <Section id="proyectos" heading={t.projects.heading} lead={t.projects.lead}>
+      {projects.map((project) => (
+        <Entry key={project.id} project={project} />
+      ))}
+    </Section>
   );
 };
 

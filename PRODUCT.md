@@ -44,7 +44,8 @@ Dos capas detrás de eso: IA aplicada (su proyecto de título es un copiloto RAG
 ## Brand Commitments
 
 - Nombre: Nicolás Villagrán Peña. Identificador actual en el sitio: "Nicolas.dev".
-- Restricción visual declarada por el usuario y vinculante: **minimalismo, movimiento/animación, y paleta dark/white**. Sin color decorativo de acento salvo que sea funcional.
+- Dirección visual vinculante (oct 2026), salida de sus propias referencias (dos pines de Pinterest, motionsites «Impressive Hero» y jhey.dev): **portada tipográfica al estilo de jhey.dev sobre negro, un solo color de acento (bermellón) y su foto a color natural**. Aprobó la portada sola antes de construir el resto. Reemplaza tres direcciones anteriores: el Sismógrafo publicado, la Lámina técnica (descartada) y un glassmorfismo asimétrico, descartado por lento («el scroll lento, se pega»).
+- **Rendimiento como requisito de marca:** scroll nativo, sin desenfoques ni animaciones ligadas al scroll. Toda animación es una transición CSS que corre una vez o al pasar el cursor. Medido: p95 bajo 9 ms por cuadro, sin cuadros largos.
 - El sitio no debe leerse como generado por IA ni como plantilla.
 
 ## Evidence on Hand
@@ -72,7 +73,7 @@ Confirmado como existente pero **aún no entregado al repositorio**. No inventar
 Dos decisiones explícitas de Nicolás, tomadas tras advertirle del costo de cada una, registradas aquí para que una sesión futura no las revierta por iniciativa propia:
 
 - El teléfono se publica en la página como enlace `tel:`, pese al riesgo de scraping.
-- Las capturas de proyectos se muestran **a color**, sin graduación ni desaturación, pese a ser el único tono de una página por lo demás neutra. El retrato sigue en monocromo graduado.
+- Las capturas de proyectos se muestran **a color**, sin graduación ni desaturación, decisión que sigue en pie aunque la página ya no sea neutra.
 
 Ausencias que no se deben rellenar: no hay testimonios, métricas de impacto, premios ni prensa. No fabricar ninguno.
 

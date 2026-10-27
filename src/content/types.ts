@@ -30,6 +30,9 @@ export type ProjectCopy = {
   imageAlts?: string[];
 };
 
+/** Prose with inline links: plain strings, and linked runs of text. */
+export type RichText = Array<string | { text: string; href: string }>;
+
 export type Dict = {
   htmlLang: string;
 
@@ -38,12 +41,19 @@ export type Dict = {
     description: string;
   };
 
-  station: {
-    component: string;
-    sheet: string;
+  /** Interface words that belong to no single section. */
+  ui: {
+    role: string;
+    open: string;
+    menu: string;
+    close: string;
+    month: string;
+    months: string;
+    ongoing: string;
+    fig: string;
   };
 
-  /** Six register names, in sheet order. */
+  /** Section names, in page order. */
   registers: string[];
 
   hero: {
@@ -51,15 +61,20 @@ export type Dict = {
     lead: string;
     record: string;
     cv: string;
-    scroll: string;
+    /** Two short mono lines under the name: what, and where. */
+    tags: [string, string];
+    /** The cover paragraph, with its inline links. */
+    intro: RichText;
+    /** Heading of the cover's short project list. */
+    selected: string;
   };
 
   profile: {
     heading: string;
     lead: string;
     /** One idea per paragraph. A single slab does not survive a 30s scan. */
-    body: string[];
-    /** Readings printed on the station plate. */
+    body: RichText[];
+    /** Short facts set beside the portrait. */
     facts: { label: string; value: string }[];
     linesHeading: string;
     lines: WorkLine[];
@@ -121,8 +136,7 @@ export type Dict = {
     locale: string;
     localeEs: string;
     localeEn: string;
-    trace: string;
-    heroTrace: string;
+    portrait: string;
   };
 };
 

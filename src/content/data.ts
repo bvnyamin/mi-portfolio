@@ -24,7 +24,7 @@ import copilotoSql960 from "../assets/projects/copiloto-sql-960.webp";
  *
  * Project screenshots ship in their own colour by Nicolás's explicit decision,
  * taken after being told it makes them the only hue on an otherwise neutral
- * page. The portrait stays graded and monochrome; this exception is scoped to
+ * page. The exception is scoped to
  * evidence of the work, where showing the real interface won the argument.
  */
 export type ProjectShot = {
@@ -70,12 +70,6 @@ export type Certification = {
   /** "YYYY-MM" or "YYYY". */
   date: string;
 };
-
-/**
- * Every record is written at the same gain. Varying it would read as a ranking
- * of the work, which is a claim this page has no basis to make.
- */
-export const RECORD_MAGNITUDE = 0.8;
 
 export const projects: Project[] = [
   {
@@ -205,9 +199,3 @@ export const contact = {
   cv: "/cv-nicolas-villagran.pdf",
 } as const;
 
-/** Santiago de Chile — the station this record was written at. */
-export const station = {
-  code: "SCL",
-  lat: "-33.4489",
-  lon: "-70.6693",
-} as const;

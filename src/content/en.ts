@@ -8,15 +8,21 @@ export const en: Dict = {
       "Computer Engineer, UTEM Chile, graduated with highest distinction. Full-Stack developer: web platforms, backend services, geospatial data and applied AI on Linux.",
   },
 
-  station: {
-    component: "COMP. N-S",
-    sheet: "REC.",
+  ui: {
+    role: "Full-Stack Developer",
+    open: "Open to opportunities",
+    menu: "Menu",
+    close: "Close",
+    month: "month",
+    months: "months",
+    ongoing: "ongoing",
+    fig: "Fig.",
   },
 
   registers: [
     "Cover",
     "Profile",
-    "Record",
+    "Experience",
     "Projects",
     "Stack",
     "Certifications",
@@ -26,18 +32,41 @@ export const en: Dict = {
   hero: {
     role: "Computer Engineering · UTEM, Chile",
     lead: "Full-Stack developer. I build enterprise web platforms, with geospatial data and applied AI on Linux.",
-    record: "Read the record",
+    record: "See projects",
     cv: "Download CV",
-    scroll: "Scroll to advance the drum",
+    tags: [
+      "Full-Stack Developer · Computer Engineer",
+      "Full Stack @ BLUE Empresa · Santiago, Chile",
+    ],
+    intro: [
+      "I build enterprise web platforms with ",
+      { text: "geospatial data", href: "#proyectos" },
+      " and ",
+      { text: "applied AI", href: "https://github.com/bvnyamin/tesis-rag-f1" },
+      " on Linux. I took ",
+      { text: "Enel X's street-lighting system", href: "#trayectoria" },
+      " from proof of concept to pre-production, and graduated from UTEM ",
+      { text: "with highest distinction", href: "#trayectoria" },
+      ".",
+    ],
+    selected: "Projects",
   },
 
   profile: {
     heading: "Profile",
     lead: "Computer Engineer from Universidad Tecnológica Metropolitana, Santiago, graduated with highest distinction. I work as a Full-Stack developer.",
     body: [
-      "I work the whole cycle: gather the requirement, model the data, build the application and hand it over tested.",
-      "My experience is in systems that actually operate. Georeferenced incident management used by field crews, dispatch and contractors: I carried it from a proof of concept through to pre-production and handed it to an internal team.",
-      "Alongside that I work with applied AI. My final-year project was a copilot that turns natural language into controlled database queries, with the emphasis on safe access.",
+      ["I work the whole cycle: gather the requirement, model the data, build the application and hand it over tested."],
+      [
+        "My experience is in systems that actually operate. ",
+        { text: "Georeferenced incident management", href: "#proyecto-luminarias" },
+        " used by field crews, dispatch and contractors: I carried it from a proof of concept through to pre-production and handed it to an internal team.",
+      ],
+      [
+        "Alongside that I work with applied AI. My final-year project was a ",
+        { text: "copilot", href: "#proyecto-copiloto" },
+        " that turns natural language into controlled database queries, with the emphasis on safe access.",
+      ],
     ],
     facts: [
       { label: "Based in", value: "Santiago, Chile" },
@@ -65,8 +94,8 @@ export const en: Dict = {
   },
 
   path: {
-    heading: "Record",
-    lead: "Experience and education, in recording order.",
+    heading: "Experience",
+    lead: "Experience and education, and how long each stage lasted.",
     present: "Present",
     techLabel: "Stack",
     entries: {
@@ -189,13 +218,11 @@ export const en: Dict = {
 
   a11y: {
     skip: "Skip to content",
-    nav: "Record index",
+    nav: "Sections",
     locale: "Language",
     localeEs: "Cambiar a español",
     localeEn: "Switch to English",
-    trace: "Decorative seismic trace",
-    heroTrace:
-      "Seismic record: a flat line entering a high-amplitude event and decaying into a coda.",
+    portrait: "Portrait of Nicolás Villagrán.",
   },
 };
 

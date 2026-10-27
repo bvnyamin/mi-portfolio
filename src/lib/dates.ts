@@ -36,3 +36,20 @@ export function formatRange(
 
   return sameYear ? `${a.split(" ")[0]} — ${b}` : `${a} — ${b}`;
 }
+
+function toMonths(value: string, now: Date, edge: "start" | "end") {
+  if (value === "present") return now.getFullYear() * 12 + now.getMonth() + 1;
+  const [year, month] = value.split("-").map(Number);
+  if (!month) return year * 12 + (edge === "start" ? 0 : 12);
+  return year * 12 + (edge === "start" ? month - 1 : month);
+}
+
+/**
+ * Inclusive month count, or null when either end is a bare year: a length
+ * measured from an unknown month would be a number nobody can stand behind.
+ */
+export function monthsBetween(from: string, to: string, now = new Date()) {
+  const known = (v: string) => v === "present" || v.includes("-");
+  if (!known(from) || !known(to)) return null;
+  return toMonths(to, now, "end") - toMonths(from, now, "start");
+}
