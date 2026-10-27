@@ -18,6 +18,10 @@ import copilotoConsulta480 from "../assets/projects/copiloto-consulta-480.webp";
 import copilotoConsulta960 from "../assets/projects/copiloto-consulta-960.webp";
 import copilotoSql480 from "../assets/projects/copiloto-sql-480.webp";
 import copilotoSql960 from "../assets/projects/copiloto-sql-960.webp";
+import restomapMapa480 from "../assets/projects/restomap-mapa-480.webp";
+import restomapMapa960 from "../assets/projects/restomap-mapa-960.webp";
+import restomapGerente480 from "../assets/projects/restomap-gerente-480.webp";
+import restomapGerente960 from "../assets/projects/restomap-gerente-960.webp";
 
 /**
  * One screenshot, served at two widths.
@@ -30,6 +34,9 @@ import copilotoSql960 from "../assets/projects/copiloto-sql-960.webp";
 export type ProjectShot = {
   small: string;
   large: string;
+  /** Intrinsic size of `large`: the frame keeps the screenshot's own shape. */
+  width: number;
+  height: number;
 };
 
 /** A project can expose several repositories; each is named for what it is. */
@@ -80,8 +87,8 @@ export const projects: Project[] = [
       { kind: "code", url: "https://github.com/bvnyamin/tesis-rag-f1" },
     ],
     shots: [
-      { small: copilotoConsulta480, large: copilotoConsulta960 },
-      { small: copilotoSql480, large: copilotoSql960 },
+      { small: copilotoConsulta480, large: copilotoConsulta960, width: 960, height: 570 },
+      { small: copilotoSql480, large: copilotoSql960, width: 960, height: 589 },
     ],
   },
   {
@@ -115,6 +122,10 @@ export const projects: Project[] = [
         url: "https://github.com/Proyecto-SDS/front-RestoMap",
       },
       { kind: "backend", url: "https://github.com/Proyecto-SDS/back-RestoMap" },
+    ],
+    shots: [
+      { small: restomapMapa480, large: restomapMapa960, width: 960, height: 427 },
+      { small: restomapGerente480, large: restomapGerente960, width: 960, height: 430 },
     ],
   },
   {

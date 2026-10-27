@@ -249,6 +249,10 @@ export const esProjects: ProjectCopyMap = {
     role: "Proyecto en equipo · Talleres de Sistemas de Software, UTEM",
     summary:
       "Aplicación para buscar restobares sobre un mapa y gestionar locales y reservas. Backend en Flask con SQLAlchemy y migraciones Alembic sobre PostgreSQL, validación con Pydantic y contenedores Docker preparados para desplegar en Cloud Run; frontend en Next.js con TypeScript.",
+    imageAlts: [
+      "Vista pública de RestoMap: mapa de Santiago con marcadores de locales, filtros por tipo (restaurante, restobar, bar) y una lista lateral de establecimientos con su valoración y horario.",
+      "Panel del gerente en RestoMap: información del local, datos no editables como RUT, tipo y dirección, y horarios de atención, con un menú lateral de empleados, métricas, inventario, reservas y paneles de mesero, cocina y barra.",
+    ],
   },
   "erp-ansimaq": {
     title: "ERP Ansimaq",

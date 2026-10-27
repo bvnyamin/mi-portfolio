@@ -249,6 +249,10 @@ export const enProjects: ProjectCopyMap = {
     role: "Team project · Software Systems Workshop, UTEM",
     summary:
       "An application for finding restaurants and bars on a map and managing venues and bookings. Flask backend with SQLAlchemy and Alembic migrations over PostgreSQL, Pydantic validation and Docker containers set up for a Cloud Run deployment; Next.js and TypeScript on the front.",
+    imageAlts: [
+      "RestoMap's public view: a map of Santiago with venue markers, filters by type (restaurant, restobar, bar) and a side list of venues with their rating and opening hours.",
+      "RestoMap's manager panel: venue information, read-only details such as tax ID, type and address, and opening hours, with a side menu for staff, metrics, inventory, bookings and waiter, kitchen and bar panels.",
+    ],
   },
   "erp-ansimaq": {
     title: "Ansimaq ERP",

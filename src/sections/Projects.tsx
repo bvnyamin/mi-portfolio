@@ -49,22 +49,35 @@ const Entry: FC<{ project: Project }> = ({ project }) => {
 
       {project.shots && project.shots.length > 0 && (
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {project.shots.map((shot, i) => (
-            <figure
-              key={shot.large}
-              className="overflow-hidden rounded-[14px] border border-line bg-[#111]"
-            >
-              <img
-                src={shot.large}
-                srcSet={`${shot.small} 480w, ${shot.large} 960w`}
-                sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 90vw"
-                alt={copy.imageAlts?.[i] ?? copy.title}
-                loading="lazy"
-                decoding="async"
-                className="block aspect-[16/10] w-full object-cover object-top"
-              />
-            </figure>
-          ))}
+          {project.shots.map((shot, i) => {
+            // A panoramic screenshot takes the full width: halved, a map or
+            // a dashboard is too short to read.
+            const wide = shot.width / shot.height > 1.9;
+            return (
+              <figure
+                key={shot.large}
+                className={`overflow-hidden rounded-[14px] border border-line bg-[#111] ${
+                  wide ? "sm:col-span-2" : ""
+                }`}
+              >
+                <img
+                  src={shot.large}
+                  srcSet={`${shot.small} 480w, ${shot.large} 960w`}
+                  sizes={
+                    wide
+                      ? "(min-width: 1024px) 860px, 90vw"
+                      : "(min-width: 1024px) 420px, (min-width: 640px) 45vw, 90vw"
+                  }
+                  width={shot.width}
+                  height={shot.height}
+                  alt={copy.imageAlts?.[i] ?? copy.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto w-full"
+                />
+              </figure>
+            );
+          })}
         </div>
       )}
     </article>
