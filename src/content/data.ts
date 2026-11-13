@@ -104,6 +104,7 @@ export const projects: Project[] = [
       "QGIS Server",
       "Leaflet",
       "Linux",
+      "Docker",
     ],
     access: "private",
     // Stand-in until there are plain screenshots: a summary poster of the
