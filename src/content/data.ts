@@ -129,11 +129,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "erp-ansimaq",
-    year: "2025",
-    stack: ["Python", "Streamlit", "Pandas"],
-  },
-  {
     id: "pilates",
     year: "2024",
     stack: ["PHP", "MySQL", "JavaScript", "Twilio API"],

@@ -254,12 +254,6 @@ export const enProjects: ProjectCopyMap = {
       "RestoMap's manager panel: venue information, read-only details such as tax ID, type and address, and opening hours, with a side menu for staff, metrics, inventory, bookings and waiter, kitchen and bar panels.",
     ],
   },
-  "erp-ansimaq": {
-    title: "Ansimaq ERP",
-    role: "Design and full build",
-    summary:
-      "Inventory and supplier modules for a machinery company, with process automation and interactive dashboards to follow the state of the business without passing through loose spreadsheets.",
-  },
   pilates: {
     title: "Pilates studio",
     role: "Frontend, backend and integration",

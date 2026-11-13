@@ -30,6 +30,6 @@ History (oct 2026): Sismógrafo shipped; Lámina técnica and the glassmorphism 
 
 ## Unresolved
 
-- ERP Ansimaq and Pilates: repo/demo links and screenshots still owed by Nicolás.
+- Pilates: repo/demo links and screenshots still owed by Nicolás. (ERP Ansimaq was removed from the site in Nov 2026.)
 - EN copy is authored from the ES source and needs his read before it goes public.
 - The served CV PDF still says «Egresado».

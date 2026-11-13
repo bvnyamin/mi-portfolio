@@ -254,12 +254,6 @@ export const esProjects: ProjectCopyMap = {
       "Panel del gerente en RestoMap: información del local, datos no editables como RUT, tipo y dirección, y horarios de atención, con un menú lateral de empleados, métricas, inventario, reservas y paneles de mesero, cocina y barra.",
     ],
   },
-  "erp-ansimaq": {
-    title: "ERP Ansimaq",
-    role: "Diseño y desarrollo completo",
-    summary:
-      "Módulos de inventario y proveedores para una empresa de maquinaria, con automatización de procesos y paneles interactivos para seguir el estado del negocio sin pasar por planillas sueltas.",
-  },
   pilates: {
     title: "Gimnasio de Pilates",
     role: "Frontend, backend e integración",
