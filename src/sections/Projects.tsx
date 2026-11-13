@@ -49,10 +49,11 @@ const Entry: FC<{ project: Project }> = ({ project }) => {
 
       {project.shots && project.shots.length > 0 && (
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {project.shots.map((shot, i) => {
+          {project.shots.map((shot, i, shots) => {
             // A panoramic screenshot takes the full width: halved, a map or
-            // a dashboard is too short to read.
-            const wide = shot.width / shot.height > 1.9;
+            // a dashboard is too short to read. So does a lone image, which
+            // would otherwise leave the second column empty.
+            const wide = shots.length === 1 || shot.width / shot.height > 1.9;
             return (
               <figure
                 key={shot.large}

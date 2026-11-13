@@ -243,6 +243,9 @@ export const esProjects: ProjectCopyMap = {
     role: "Enel X · plataforma interna",
     summary:
       "Sistema web georreferenciado para la gestión de incidencias en luminarias de alumbrado público, usado en los flujos de atención, despacho, contratistas y equipos de terreno. Backend en Python y Flask con plantillas Jinja sobre PostgreSQL/PostGIS, y capa cartográfica con QGIS Server y Leaflet desplegada sobre Linux. Lo llevé desde una prueba de concepto que reemplazaba una plataforma interna hasta preproducción, y lo transferí a un equipo de la compañía.",
+    imageAlts: [
+      "Lámina resumen de la plataforma de luminarias de Enel X: mapa con las luminarias y casos georreferenciados, listado de casos con filtros por comuna, estado, contratista y prioridad, formulario de edición de un caso con evidencia fotográfica, panel de indicadores por municipio y tipo de falla, y el stack: Linux, Docker, Python, Flask y PostgreSQL. Los datos de los casos aparecen difuminados.",
+    ],
   },
   restaurantes: {
     title: "RestoMap",

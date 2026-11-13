@@ -243,6 +243,9 @@ export const enProjects: ProjectCopyMap = {
     role: "Enel X · internal platform",
     summary:
       "A georeferenced web system for managing faults in public street lighting, used across support, dispatch, contractor and field-crew workflows. Python and Flask backend with Jinja templates over PostgreSQL/PostGIS, and a cartographic layer built with QGIS Server and Leaflet, deployed on Linux. I carried it from a proof of concept replacing an internal platform through to pre-production, and handed it to a team at the company.",
+    imageAlts: [
+      "Summary sheet of the Enel X street-lighting platform: a map of georeferenced streetlights and cases, a case list filtered by district, status, contractor and priority, a case-editing form with photo evidence, a dashboard by municipality and fault type, and the stack: Linux, Docker, Python, Flask and PostgreSQL. Case data is blurred out.",
+    ],
   },
   restaurantes: {
     title: "RestoMap",

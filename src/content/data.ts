@@ -18,6 +18,8 @@ import copilotoConsulta480 from "../assets/projects/copiloto-consulta-480.webp";
 import copilotoConsulta960 from "../assets/projects/copiloto-consulta-960.webp";
 import copilotoSql480 from "../assets/projects/copiloto-sql-480.webp";
 import copilotoSql960 from "../assets/projects/copiloto-sql-960.webp";
+import luminariasPoster480 from "../assets/projects/luminarias-poster-480.webp";
+import luminariasPoster960 from "../assets/projects/luminarias-poster-960.webp";
 import restomapMapa480 from "../assets/projects/restomap-mapa-480.webp";
 import restomapMapa960 from "../assets/projects/restomap-mapa-960.webp";
 import restomapGerente480 from "../assets/projects/restomap-gerente-480.webp";
@@ -104,6 +106,11 @@ export const projects: Project[] = [
       "Linux",
     ],
     access: "private",
+    // Stand-in until there are plain screenshots: a summary poster of the
+    // platform that Nicolás supplied in Nov 2026.
+    shots: [
+      { small: luminariasPoster480, large: luminariasPoster960, width: 960, height: 640 },
+    ],
   },
   {
     id: "restaurantes",
